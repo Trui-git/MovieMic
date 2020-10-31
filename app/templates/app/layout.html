@@ -2,18 +2,26 @@
 {% extends "app/index.html" %}
 
 {% block content %}
-
-{% for poster,id, title in showDetails %}
-<a href="../showdetails/{{ id }}" title="{{ title }}">
-    {% if poster == None %}
-        <div class="seasonThumbs" style="background: url('../static/app/images/noImage.jpg');background-size: 100% 100%;">
-    
-    {% else %}
-        <div class="seasonThumbs" style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;">  
-    {% endif %}
-            <p id="pSeasons">{{ title|truncatechars:100 }}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {% for poster,id, title in showDetails %}
+                    {% if poster != None %}
+                        <div class="col-sm-3" style="min-width:226px; margin-top: 15px;">
+                            <div class="card pull-left">
+                                <div class="card-img-top">                              
+                                    <a href="../seasons/{{ id }}" title="{{ title }}">
+                                        <div class="seasonThumbs" 
+                                            style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;"> 
+                                            <p id="pSeasons">{{ title|truncatechars:16 }}</p>
+                                        </div>
+                                    </a>                                    
+                                </div>
+                            </div>
+                        </div>        
+                    {% endif %}            
+                {% endfor %}
+            </div>
         </div>
-</a>
-{% endfor %}
-
+    </div>
 {% endblock %}

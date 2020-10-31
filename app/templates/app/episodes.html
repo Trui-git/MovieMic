@@ -1,0 +1,23 @@
+
+{% extends "app/layout.html" %}
+
+{% block content %}
+    <div class="episodeDetails">
+        <iframe id="iframe_episodeDetails" src="../series_details"></iframe>
+    </div>
+    <div class="episodeList">
+    {% for title,epNum,poster in ep_details %}
+        <a href="../episodeDetails/{{ epNum }}" target="iframe_episodeDetails">
+            {% if poster == None %}
+                <div class="episodeThumbs" 
+                style="background: url('../static/app/images/noImage.jpg'); background-size: 100% 100%;">
+            {% else %}
+                <div class="episodeThumbs" 
+                style="background: url('https://image.tmdb.org/t/p/original{{ poster }}'); background-repeat: no-repeat; background-size: 100% 100%;">  
+            {% endif %}
+                    <p id="pTitle">Ep {{ forloop.counter }}:-{{ title }}</p>
+                </div>
+        </a>
+    {% endfor %}
+    </div>  
+{% endblock %}

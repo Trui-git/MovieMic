@@ -1,0 +1,49 @@
+
+{% extends "app/index.html" %}
+
+{% block video %}
+    {% if tvVideo != "" %}
+        <div id="searchDiv" class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" style="pointer-events:none" frameborder="0"
+                src="https://youtube.com/embed/{{ tvVideo }}?modestbranding=1&cc_load_policy=1&vq=large&autoplay=1&mute=1&loop=1&playlist={{ tvVideo }}&controls=0&autohide=1&rel=0" allowfullscreen>
+            </iframe>
+        </div>
+    {% else %}
+        <div id="searchDiv" class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" style="pointer-events:none" frameborder="0"
+                src="https://youtube.com/embed/xLtYmhj-0Kg?modestbranding=1&cc_load_policy=1&vq=large&autoplay=1&mute=1&loop=1&playlist=xLtYmhj-0Kg&controls=0&autohide=1&rel=0" allowfullscreen>
+            </iframe>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+    <h3>Now On TV Showing</h3>
+    <form action='../' method='POST'>
+        {% csrf_token %}
+        <div class="posterContainer">        
+            <div class="containerSetting">
+                {% for poster,id, title in showDetails %}
+                    {% if poster != None %}
+                        <div class="poster">
+                            <div class="posterMedia" >
+                                <img class="posterImg" src="https://image.tmdb.org/t/p/original{{ poster }}" alt=""  />
+                            </div>
+                            <div class="posterDetails">
+                                <div class="posterTitle">
+                                    {{ title|truncatechars:16 }}
+                                </div>
+                            </div>
+                            <button id="imageButton" 
+                                type="submit" 
+                                name="onTVId" 
+                                value={{ id }}>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+{% endblock %}

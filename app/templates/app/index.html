@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - My Django Application</title>
+    <title>{{ title }} - TV Master</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="shortcut icon" href="../../static/app/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
 </head>
@@ -19,32 +21,61 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Application name</a>
+                <a href="/" class="navbar-brand">
+                    <img src="../../static/app/images/tmdb.png" style="width: 30px; height: 30px; float: left; margin-right: 5px;">
+                    <p style="padding-top: 5px; float: left; font-size: 14px;">TV Master</p> 
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" asp-page="/Index" style="margin-top: 5px;">TVs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Popular">Popular</a></li>
+                            <li><a href="/Upcoming">Upcoming</a></li>
+                        </ul>
+                    </li>              
+                </ul>
+                <div id="searchBar" style="margin-top: 5px;">
+                    <!--asp-page="Index" indicate that it always go index page with this sarch bar request-->
+                    <form class="navbar-form navbar-left" role="search" action='../search_results' method='POST'>
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <input id="searchText" type="text" class="form-control" name="searchTerm" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </form>
+                </div>
+                <!--
+                <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li>
-                        <form id="form_showSearch"action='../search_Query' method='POST'>
+                        <form id="form_showSearch"action='../search_results' method='POST'>
                         {% csrf_token %}
                         <input type = "text" placeholder="Search here" name="searchTerm">
                         <input type='submit' value="Search" />
                     </li>
+                </ul>
+                -->
             </div>
         </div>
     </div>
 
     <div class="container body-content">
-{% block content %}{% lorem 100 w random %}{% endblock %}
+    {% block video %}{% endblock %}
+    {% block content %}{% endblock %}
         <footer>
-            <p>&copy; {{ year }} - My Django Application</p>
+            <img src="../../static/app/favicon.ico" alt="logo">
+            <p>&copy; {{ year }} - Python and Django Application</p>
         </footer>
     </div>
 
     <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
     <script src="{% static 'app/scripts/respond.js' %}"></script>
-{% block scripts %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
 </body>
 </html>

@@ -1,55 +1,209 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: #101010;
 }
 
-.seasonThumbs {
-    width: 20%;
-    height: 367px;
-    border: 2px solid #333;
-    margin: 13px;
-    border-radius: 8px;
+#searchBar {
+    font-size: 17px;
+    cursor: pointer;
+    float: right;
+}
+
+#searchDiv {
+    margin: 15px 0;
+}
+
+.showTitle {
+    background: rgba(255, 255, 255, .67);
+    color: #333;
+    padding: 1px 3px;
+    position: relative;
+    top: 270px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.episodeThumbs {
+    width: 75%;
+    height: 200px;
+    border-radius: 14px;
+    border: 1px solid rgb(212, 208, 208);
+    text-align: center;
+    margin: 25px;
     float: left;
+    box-shadow: 5px 10px 8px #0c0c0c;
+}
+.episodeDetails {
+    float: left;
+    width: 80%;
+    height: 90vh;
+}
+.episodeList {
+    float: left;
+    max-height: 90vh;
+    width: 20%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#iframe_episodeDetails {
+    width: calc(100% - 50px);
+    height: calc(100vh - 50px);
+    border: 0;
+    padding: 25px;
+    color: #fff;
 }
 
 footer {
+    margin-top: 40px;
     clear: both;
+    color: #ecf0f1;
+}
+footer img {
+    width: 70px;
+    height: 35px;
+    float: left;
+    margin-right: 20px;
+}
+footer p{
+    padding-top: 8px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/* CSS section for layout.html */
+.seasonThumbs {
+    width: 220px;
+    min-height: 300px;
+    max-height: 300px;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+    .seasonThumbs:hover {
+        box-shadow: -3px -3px 6px 0 rgba(113, 113, 113, 0.83), 
+            6px 6px 8px 0 rgba(0, 0, 0, 1);
+    }
+
+/* CSS Section for OnTV.html */
+.posterContainer {
+    overflow-x: scroll;
+    width: 100%;
+}
+.containerSetting {
+    transition: 450ms -webkit-transform;
+    transition: 450ms transform;
+    transition: 450ms transform, 450ms -webkit-transform;
+    font-size: 0;
+    white-space: nowrap;
+    margin: 70.3125px 0;
+    padding-bottom: 10px;
+}
+.poster {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+    height: 300px;
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 450ms all;
+    -webkit-transform-origin: center left;
+            transform-origin: center left;
+}
+.posterImg {
+    width: 220px;
+    height: 300px;
+    -o-object-fit: cover;
+        object-fit: cover;
+}
+.posterDetails {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-size: 10px;
+    opacity: 0;
+    transition: 450ms opacity;
+}
+.posterDetails:after,
+.posterDetails:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: #000;
+}
+.posterDetails:after {
+    margin-top: -25px;
+    margin-left: -25px;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #ecf0f1;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+.posterDetails:before {
+    content: '▶';
+    left: 0;
+    width: 100%;
+    font-size: 30px;
+    margin-left: 3px;
+    margin-top: -22px;
+    text-align: center;
+    color: #ecf0f1;
+    z-index: 2;
+}
+.poster:hover .posterDetails {
+    opacity: 1;
+}
+.posterTitle {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+.containerSetting:hover {
+    -webkit-transform: translate3d(20px, 0, 0);
+            transform: translate3d(20px, 0, 0);
+}
+.containerSetting:hover .poster {
+    opacity: 0.3;
+}
+.containerSetting:hover .poster:hover {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    opacity: 1;
+}
+.poster:hover ~ .poster {
+    -webkit-transform: translate3d(125px, 0, 0);
+            transform: translate3d(125px, 0, 0);
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+h3 {
+    font-weight: bold;
+    color: #ecf0f1;
+    margin-top: 100px;
 }
 
-/* styles for validation helpers */
-.field-validation-error {
-    color: #b94a48;
+.posterImg {
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
 }
 
-.field-validation-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid #b94a48;
-}
-
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
-.validation-summary-errors {
-    color: #b94a48;
-}
-
-.validation-summary-valid {
-    display: none;
+/* put this button over poster */
+#imageButton {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    border: 0;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
 }

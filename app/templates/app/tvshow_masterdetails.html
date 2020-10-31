@@ -1,0 +1,29 @@
+
+<head>
+    <style>
+        #showPanel {
+            height: calc(100vh - 100px);
+            width: calc(100% - 100px);
+            padding: 50px;
+            background: url('https://image.tmdb.org/t/p/original{{ tvShowPoster }}');
+            background-size: cover;
+            color: #fff;
+            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+
+{% block content %}
+   
+    <div id="showPanel">
+        <h1>{{ tvShowName }}</h1>
+        <p>{{ tvShowOverview }}</p>
+        <br>
+        <h2>Show Rating: {{ tvShowRating }}</h2>
+        <h3>Number of Seasons: {{ tvShowTotalSeasons }}</h3>
+        <h3>Number of Episodes: {{ tvShowTotalEpisodes }}</h3>
+    </div>
+    
+{% endblock %}

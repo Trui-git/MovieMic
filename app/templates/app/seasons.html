@@ -1,0 +1,17 @@
+
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+    {% for poster, title, seasonNum, overview in seasonDetails %}
+        <a href="../episodes/{{ seasonNum }}" title={{ overview }}>
+            {% if poster != "" %}
+                <div class="seasonThumbs" 
+                    style="background: url('https://image.tmdb.org/t/p/original{{ poster }}'); background-repeat: no-repeat; background-size: 100% 100%;">
+                    <p class="showTitle">{{ title }}</p>
+                </div>
+            {% endif %}
+        </a>
+    {% endfor %}
+
+{% endblock %}
