@@ -42,7 +42,13 @@ def search(request):
     stuff = fetch.fetch.get_shows(searchTerm)       
     tvShowPosters = stuff[0]
     tvShowIDs = stuff[1]
-    tvShowTitle = stuff[2]
+    tvShowTitles = stuff[2]
+
+
+    stuff = fetch.fetch.get_search_result_details(tvShowIDs)
+    tvShowOverviews = stuff[0]
+    tvShowHomepages = stuff[1]
+    tvShowBackdrops = stuff[2]
 
     return render(
         request,
@@ -51,7 +57,7 @@ def search(request):
             'title':'TV Shows',
             'message':'Your application description page.',
             'year':datetime.now().year,
-            'showDetails': zip(tvShowPosters,tvShowIDs,tvShowTitle),
+            'showDetails': zip(tvShowPosters, tvShowIDs, tvShowTitles, tvShowOverviews, tvShowHomepages, tvShowBackdrops),
         }
     )
 

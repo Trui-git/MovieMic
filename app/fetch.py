@@ -225,3 +225,27 @@ class fetch():
         else:
             keys = None
         return keys
+
+    def get_search_result_details(tvShowIDs):
+        stuff = []
+        overviews = []
+        homepages = []
+        backdrops = []
+
+        for idx in tvShowIDs:
+            url = "https://api.themoviedb.org/3/tv/" + str(idx) + "?api_key=" + api_key
+            response = requests.get(url)
+            if(response.ok):
+                jData = json.loads(response.content)
+                overview_data = jData['overview']
+                homepage_data = jData['homepage']
+                backdrop_path_data = jData['backdrop_path']
+                overviews.append(overview_data)
+                homepages.append(homepage_data)
+                backdrops.append(backdrop_path_data)
+
+        stuff.append(overviews)
+        stuff.append(homepages)
+        stuff.append(backdrops)
+
+        return stuff

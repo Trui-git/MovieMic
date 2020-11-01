@@ -5,16 +5,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                {% for poster,id, title in showDetails %}
+                {% for poster, id, title, overview, homepage, backdrop in showDetails %}
                     {% if poster != None %}
                         <div class="col-sm-3" style="min-width:226px; margin-top: 15px;">
-                            <div class="card pull-left">
-                                <div class="card-img-top">                              
+                            <div class="card pull-left scene">
+                                <div class="movie">    
                                     <a href="../seasons/{{ id }}" title="{{ title }}">
-                                        <div class="seasonThumbs" 
+                                        <div class="posterSearch" 
                                             style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;"> 
-                                            <p id="pSeasons">{{ title|truncatechars:16 }}</p>
                                         </div>
+                                        <div class="info">
+                                            <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdrop }}')">
+                                            </header>
+                                            <div class="overview" >{{ overview }}</div>
+                                        </div>                                       
                                     </a>                                    
                                 </div>
                             </div>
