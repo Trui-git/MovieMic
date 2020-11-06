@@ -3,6 +3,7 @@ from django.http import response
 import requests
 import json
 from datetime import datetime, timedelta
+import random
 
 api_key = "60918711ab06f46cb045b0ee80dcebd9" # your api_key from TMDB
 
@@ -135,20 +136,17 @@ class fetch():
         
         return stuff
 
-    def get_season_details():
+    def get_season_details(season_num):
         seasonUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "?api_key=" + api_key
-        
         response = requests.get(seasonUrl)
         creatorStuff = []
         tvShowDetails = []
-        
         tvShowPoster =""
-        tvShowDetailsRequests = ["id", "original_name", "overview", "vote_average", "number_of_seasons", "number_of_episodes"]
+        tvShowDetailsRequests = ["id", "original_name", "overview", "vote_average", "number_of_seasons", "number_of_episodes", "episode_run_time" , "first_air_date"]
         if(response.ok):
             jData = json.loads(response.content)
-            tvShowPoster =jData['poster_path']
+            #tvShowPoster =jData['poster_path']
             creatorsData = jData['created_by']
-            
             creatorNames = []
             creatorPosters =[]            
 
@@ -167,17 +165,31 @@ class fetch():
         else:
             creatorStuff = None
 
-        creditsUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/credits?api_key=" + api_key
-        
+        seasonUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "?api_key=" + api_key
+        response = requests.get(seasonUrl)
+        episodes = []
+        overview = []
+        if(response.ok):
+            jData = json.loads(response.content)
+            tvShowPoster =jData['poster_path']
+            seasonOverview = jData['overview']
+            episodes = jData['episodes']
+        else:
+            episodes = None
+            overview = None
+        tvShowDetails.append(seasonOverview)
+        tvShowDetails.append(len(episodes))
+
+        creditsUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "/credits?api_key=" + api_key
         response = requests.get(creditsUrl)
         creditDetails = []
         if(response.ok):
             jData = json.loads(response.content)
             castDetails =jData['cast']
-
             castNames = []
-            castPosters =[]
+            castPosters = []
             castIDs = []
+            castCharacters = []
             for idx in range(len(castDetails)):
                 name = castDetails[idx]['name']
                 castNames.append(name)
@@ -185,28 +197,55 @@ class fetch():
                 castPosters.append(profilePic)
                 ids = castDetails[idx]['id']
                 castIDs.append(ids)
-                creditDetails.append(castNames)
-                creditDetails.append(castPosters)
-                creditDetails.append(castIDs)
+                castCharacter = castDetails[idx]['character']                
+                castCharacters.append(castCharacter)
+            creditDetails.append(castNames)
+            creditDetails.append(castPosters)
+            creditDetails.append(castIDs)
+            creditDetails.append(castCharacters)
         else:
             creditDetails = None
         
         imagesUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/images?api_key=" + api_key
-        
         response = requests.get(imagesUrl)
         imagesDetails = []
         if(response.ok):
             jData = json.loads(response.content)
             backdropDetails =jData['backdrops']
             imagePaths =[]
-            
             for idx in range(len(backdropDetails)):
                 image = backdropDetails[idx]['file_path']
                 imagesDetails.append(image)   
         else:
             imagesDetails = None
 
-        return creatorStuff,tvShowDetails,tvShowPoster,creditDetails,imagesDetails
+        videoUrl = "https://api.themoviedb.org/3/tv/" + masterTvID  + "/videos?api_key=" + api_key + "&language=en-US"
+        response = requests.get(videoUrl)
+        videoKeys = []
+        anyKey = 0
+        returnKey = ''
+
+        if(response.ok): # 200 ok
+            jData = json.loads(response.content)
+            data = jData['results']
+            for idx in range(len(data)):
+                videoKey = data[idx]['key']
+                videoKeys.append(videoKey)
+
+            # Generate one rumdon video
+            if len(data) > 0:
+                anyKey = random.randint(0,len(videoKeys)-1)
+            else:
+                videoKeys = None
+        else:
+            videoKeys = None
+
+        if  videoKeys == None:
+            returnKey = None
+        else:
+            returnKey = videoKeys[anyKey]
+
+        return creatorStuff,tvShowDetails,tvShowPoster,creditDetails,imagesDetails, returnKey
 
     def get_videoFromId(id):
         url = "https://api.themoviedb.org/3/tv/" + str(id)  + "/videos?api_key=" + api_key + "&language=en-US"
@@ -249,3 +288,186 @@ class fetch():
         stuff.append(backdrops)
 
         return stuff
+
+    def get_max_seasons():
+        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "?api_key=" + api_key
+        response = requests.get(url)
+        stuff = []
+
+        if(response.ok):
+            jData = json.loads(response.content)
+            stuff = jData['number_of_seasons']
+        else:
+            stuff = None
+
+        return stuff
+
+    def get_episode_details(season_num, episode_num):
+        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + season_num + "/episode/" + episode_num + "?api_key=" + api_key
+        response = requests.get(url)
+        crewStuffs = []
+        guestStuffs = []
+        episodeDetails = []
+        guestDetails = []
+        crewDetails = []
+        episodeDetailsRequests = ["air_date", "name", "overview", "id", "production_code", "still_path", "vote_average", "vote_count"]
+
+        if(response.ok):
+            jData = json.loads(response.content)
+            for items in episodeDetailsRequests:
+                value = jData[items]
+                episodeDetails.append(value)
+
+            crewNames = []
+            crewPosters = []
+            crewIDs = []
+            crewCharacters = []
+            crewDepartments = []
+            crewJobs = []
+            crewDetails =jData['crew']
+            for idx in range(len(crewDetails)):
+                name = crewDetails[idx]['name']
+                crewNames.append(name)
+                profilePic = crewDetails[idx]['profile_path']
+                crewPosters.append(profilePic)
+                ids = crewDetails[idx]['id']
+                crewIDs.append(ids)
+                crewDepartment = crewDetails[idx]['department']                
+                crewDepartments.append(crewDepartment)
+                crewJob = crewDetails[idx]['job']                
+                crewJobs.append(crewJob)
+
+            crewStuffs.append(crewNames)
+            crewStuffs.append(crewPosters)
+            crewStuffs.append(crewIDs)
+            crewStuffs.append(crewDepartments)
+            crewStuffs.append(crewJobs)
+
+
+            guestNames = []
+            guestPosters = []
+            guestIDs = []
+            guestCharacters = []
+            guestDetails =jData['guest_stars']
+            for idx in range(len(guestDetails)):
+                name = guestDetails[idx]['name']
+                guestNames.append(name)
+                profilePic = guestDetails[idx]['profile_path']
+                guestPosters.append(profilePic)
+                ids = guestDetails[idx]['id']
+                guestIDs.append(ids)
+                guestCharacter = guestDetails[idx]['character']                
+                guestCharacters.append(guestCharacter)
+
+            guestStuffs.append(guestNames)
+            guestStuffs.append(guestPosters)
+            guestStuffs.append(guestIDs)
+            guestStuffs.append(guestCharacters)
+
+        else:
+            crewStuffs = None
+            episodeDetails = None
+            guestStuffs = None
+
+        return episodeDetails, crewStuffs, guestStuffs
+
+    def get_actor_details(id):
+        url = "https://api.themoviedb.org/3/person/" + id + "?api_key=" + api_key
+        response = requests.get(url)
+
+        actorBios = []
+        actorItems = [
+            "adult", "biography", "birthday", 
+            "deathday", "gender", "homepage", 
+            "imdb_id", "known_for_department",
+            "name", "place_of_birth", "profile_path", "popularity"]
+
+        if(response.ok):
+            jData = json.loads(response.content)
+            for items in actorItems:
+                value = jData[items]
+                actorBios.append(value)
+        else:
+            actorBios = None
+
+        url = "https://api.themoviedb.org/3/person/" + id + "/images?api_key=" + api_key
+        response = requests.get(url)
+        actorPosters = []
+        if(response.ok):
+            jData = json.loads(response.content)
+            profiles =jData['profiles']
+            for idx in range(len(profiles)):
+                actorPoster = profiles[idx]['file_path']
+                actorPosters.append(actorPoster)
+        else:
+            actorPosters = None
+
+        url = "https://api.themoviedb.org/3/person/" + id + "/tv_credits?api_key=" + api_key
+        response = requests.get(url)
+
+        stuff = []
+        names = []
+        voteCounts = []
+        voteAverages = []
+        firstAirDates = []
+        posterPaths = []
+        backdropPaths = []
+        overviews = []
+        popularities = []
+        characters = []
+        creditIds = []
+        episodeCounts = []
+
+        if(response.ok):
+            jData = json.loads(response.content)
+            data =jData['cast']
+            for idx in range(len(data)):
+                name = data[idx]['name']
+                names.append(name)
+
+                voteCount = data[idx]['vote_count']
+                voteCounts.append(voteCount)
+            
+                voteAverage = data[idx]['vote_average']
+                voteAverages.append(voteAverage)
+
+                firstAirDate = data[idx]['first_air_date']
+                firstAirDates.append(firstAirDate)
+
+                posterPath = data[idx]['poster_path']
+                posterPaths.append(posterPath)
+
+                backdropPath = data[idx]['backdrop_path']
+                backdropPaths.append(backdropPath)
+
+                overview = data[idx]['overview']
+                overviews.append(overview)
+                
+                popularity = data[idx]['popularity']
+                popularities.append(popularity)
+
+                character = data[idx]['character']
+                characters.append(character)
+
+                creditId = data[idx]['credit_id']
+                creditIds.append(creditId)
+
+                episodeCount = data[idx]['episode_count']
+                episodeCounts.append(episodeCount)
+
+            stuff.append(names)
+            stuff.append(voteCounts)
+            stuff.append(voteAverages)
+            stuff.append(firstAirDates)
+            stuff.append(posterPaths)
+            stuff.append(backdropPaths)
+            stuff.append(overviews)
+            stuff.append(popularities)
+            stuff.append(characters)
+            stuff.append(creditIds)
+            stuff.append(episodeCounts)
+     
+        else:
+            stuff = None
+
+        return actorBios, actorPosters, stuff

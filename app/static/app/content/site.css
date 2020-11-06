@@ -4,6 +4,12 @@ body {
     background: #494747;
 }
 
+/* put prefix -webkit- to support 
+**apple and -moz- for firefox*/
+
+/***************************
+        Menu Bar 
+****************************/
 #searchBar {
     font-size: 17px;
     cursor: pointer;
@@ -14,66 +20,29 @@ body {
     margin: 15px 0;
 }
 
-.showTitle {
-    background: rgba(255, 255, 255, .67);
-    color: #333;
-    padding: 1px 3px;
-    position: relative;
-    top: 270px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    text-align: center;
-    font-weight: 700;
-}
-
-.episodeThumbs {
-    width: 75%;
-    height: 200px;
-    border-radius: 14px;
-    border: 1px solid rgb(212, 208, 208);
-    text-align: center;
-    margin: 25px;
-    float: left;
-    box-shadow: 5px 10px 8px #0c0c0c;
-}
-.episodeDetails {
-    float: left;
-    width: 80%;
-    height: 90vh;
-}
-.episodeList {
-    float: left;
-    max-height: 90vh;
-    width: 20%;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-#iframe_episodeDetails {
-    width: calc(100% - 50px);
-    height: calc(100vh - 50px);
-    border: 0;
-    padding: 25px;
-    color: #fff;
-}
-
-footer {
+/*******************************************
+            CSS section for footer 
+ *******************************************/
+ footer {
     margin-top: 40px;
     clear: both;
     color: #ecf0f1;
 }
+
 footer img {
     width: 70px;
     height: 35px;
     float: left;
     margin-right: 20px;
 }
-footer p{
+
+footer p {
     padding-top: 8px;
 }
 
-/******************************
- CSS section for layout.html 
- ******************************/
+/*******************************************
+ CSS section for layout.html and season.html
+ *******************************************/
 .seasonThumbs {
     width: 220px;
     min-height: 300px;
@@ -145,7 +114,6 @@ footer p{
     font-size: 0.75em;
 }
 
-/* Movie information */
 
 .info header {
     color: rgb(19, 15, 15);
@@ -181,14 +149,15 @@ footer p{
     transition: box-shadow 350ms;
 }
 
-/*************************
-CSS Section for OnTV.html 
-**************************/
+/************************************
+      CSS Section for OnTV.html 
+*************************************/
 
 .posterContainer {
     overflow-x: scroll;
     width: 100%;
 }
+
 .containerSetting {
     transition: 450ms -webkit-transform;
     transition: 450ms transform;
@@ -198,6 +167,7 @@ CSS Section for OnTV.html
     margin: 70.3125px 0;
     padding-bottom: 10px;
 }
+
 .poster {
     position: relative;
     display: inline-block;
@@ -210,12 +180,17 @@ CSS Section for OnTV.html
     -webkit-transform-origin: center left;
             transform-origin: center left;
 }
+
 .posterImg {
     width: 220px;
     height: 300px;
-    -o-object-fit: cover;
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
         object-fit: cover;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
 }
+
 .posterDetails {
     position: absolute;
     bottom: 0;
@@ -226,6 +201,7 @@ CSS Section for OnTV.html
     opacity: 0;
     transition: 450ms opacity;
 }
+
 .posterDetails:after,
 .posterDetails:before {
     content: '';
@@ -234,6 +210,7 @@ CSS Section for OnTV.html
     left: 50%;
     display: #000;
 }
+
 .posterDetails:after {
     margin-top: -25px;
     margin-left: -25px;
@@ -246,6 +223,7 @@ CSS Section for OnTV.html
     background: rgba(0,0,0,0.5);
     z-index: 1;
 }
+
 .posterDetails:before {
     content: '▶';
     left: 0;
@@ -257,9 +235,11 @@ CSS Section for OnTV.html
     color: #ecf0f1;
     z-index: 2;
 }
+
 .poster:hover .posterDetails {
     opacity: 1;
 }
+
 .posterTitle {
     position: absolute;
     bottom: 0;
@@ -267,18 +247,22 @@ CSS Section for OnTV.html
     font-weight: bold;
     color: #ecf0f1;
 }
+
 .containerSetting:hover {
     -webkit-transform: translate3d(20px, 0, 0);
             transform: translate3d(20px, 0, 0);
 }
+
 .containerSetting:hover .poster {
     opacity: 0.3;
 }
+
 .containerSetting:hover .poster:hover {
     -webkit-transform: scale(1.5);
             transform: scale(1.5);
     opacity: 1;
 }
+
 .poster:hover ~ .poster {
     -webkit-transform: translate3d(125px, 0, 0);
             transform: translate3d(125px, 0, 0);
@@ -288,11 +272,6 @@ h3 {
     font-weight: bold;
     color: #ecf0f1;
     margin-top: 100px;
-}
-
-.posterImg {
-    border-radius: 6px;
-    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
 }
 
 /* put this button over poster */
@@ -306,4 +285,496 @@ h3 {
     left: 0;
     top: 0;
     z-index: 5;
+}
+
+/************************************
+    CSS section for episodes.html 
+ ***********************************/ 
+ .episodeDetails {
+    float: left;
+    width: 80%;
+}
+
+.episodeContainer {
+    float: right;
+    width: 20%;
+    max-height: 1350px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 5px;
+}
+
+.episodeSetting {
+    transition: 450ms -webkit-transform;
+    transition: 450ms transform;
+    transition: 450ms transform, 450ms -webkit-transform;
+    font-size: 0;
+    white-space: nowrap;
+    margin: 70px 0;
+    padding-bottom: 10px;
+}
+
+/***original image 1920*1080********
+***shrink to 0.75 times to 144*81***/
+.episodePoster {
+    position: relative;
+    width: 144px;
+    height: 81px;
+    cursor: pointer;
+    transition: 450ms all;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.episodePosterImg {
+    margin: auto;
+    width: 144px;
+    height: 81px;
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
+            object-fit: cover;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+.episodeSetting:hover .episodePoster {
+    opacity: 0.3;
+}
+
+.episodeSetting:hover .episodePoster:hover {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    opacity: 1;
+}
+
+#seasonVideoIframe {
+    margin: 10px;
+    margin-top: 70px;
+    margin-left: 0px;
+}
+
+.noVideo {
+    font-size: 30px;
+    color: #B8B5B5;
+    top: 30%;
+    left: 35%;
+    position: absolute;
+}
+
+.seasonPoster { 
+    float: left;
+    height: 450px;
+    width: 300px;    
+    margin-top: 30px;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+.seasonInfo {
+    float: left;
+    color: #ecf0f1;
+    padding: 40px;
+    padding-top: 0px;
+    width: calc(100% - 300px);    
+    height: 450px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 30px;
+}
+
+.seasonVideo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.episodeDetails > .container-fluid {
+    float: left;
+    margin-bottom: 40px;
+}
+
+.episodeDetails > h3 {
+    color: #ecf0f1;
+    margin-top: 50px;
+    float: left;
+    width: 100%;
+}
+
+/*** cast div config ***/
+.castScene {
+    width: 138px;
+    height: 175px;
+    margin: 10px;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+}
+
+.castMovie {
+    width: 138px;
+    height: 175px;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(-110px);
+    -moz-transform: translateZ(-110px);
+    transform: translateZ(-110px);
+    -webkit-transition: -webkit-transform 350ms;
+    -moz-transition: -moz-transform 350ms;
+    transition: transform 350ms;
+}
+
+.castMovie:hover {
+    -webkit-transform: rotateY(-78deg) translateZ(20px);
+    -moz-transform: rotateY(-78deg) translateZ(20px);
+    transform: rotateY(-78deg) translateZ(20px);
+}
+
+/*Transform and style the two planes*/
+
+.castMovie .castPics, 
+.castMovie .castInfo {
+    position: absolute;
+    width: 138px;
+    height: 175px;
+    background-color: #fff;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+.castMovie .castPics  {
+    -webkit-transform: translateZ(70px);
+    -moz-transform: translateZ(70px);
+    transform: translateZ(70px);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.castMovie .castInfo {
+    -webkit-transform: rotateY(90deg) translateZ(70px);
+    -moz-transform: rotateY(90deg) translateZ(70px);
+    transform: rotateY(90deg) translateZ(70px);
+    border: 1px solid #B8B5B5;
+    font-size: 0.75em;
+}
+
+.castInfo .character {
+    padding: 1.2em 1.4em;
+    margin: 2px 0 0;
+    font-weight: 700;
+    color: #666;
+    line-height: 1.4em;
+    height: 175px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.castMovie .castPics,
+.castMovie .castInfo {
+    -webkit-transition: box-shadow 350ms;
+    -moz-transition: box-shadow 350ms;
+    transition: box-shadow 350ms;
+}
+
+/*************************************
+CSS setting for Episode_detail.html
+*************************************/
+.episodeDetailContainer{
+    width: 100%;
+    height: 250px;
+    background-color: #494747;
+    margin-top: 30px;
+    min-width: 500px;
+}
+
+.episodeDetailPoster { 
+    float: left;
+    height: 150px;
+    width: 250px;    
+    margin: 20px;
+    margin-top: 80px;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+.episodeDetailInfo {
+    float: left;
+    color: #ecf0f1;
+    padding: 50px 20px 0px 20px;
+    width: calc(100% - 300px);
+    margin-top: 30px;
+}
+
+.episodeDetailTitle {
+    margin: 50px 30px 30px 30px;
+}
+
+.episodeDetailCrewGuest {
+    float: left;
+    margin-bottom: 30px;
+}
+
+
+/**********************************
+    CSS Setting for actor.html
+**********************************/
+.bio {
+    padding: 10px 40px;
+    color: #fff;
+    font-size: 1.1em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#actorFrame {
+    margin-top: 20px;
+    width: 100%;
+    height: 450px;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+#actorStats {
+    width: 300px;
+    height: 450px;
+    float: left;
+    background: #444;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 30px 20px;
+    color: #fff;
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    background-size: 100%; 
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
+}
+
+#actorBio {
+    width: calc(100% - 300px);
+    height: 440px;
+    overflow: auto;
+    overflow-x: hidden;
+    float: left;
+    color: #ecf0f1;
+}
+
+#actorBio > h2 {
+    margin: 0;
+    padding: 30px 40px;
+    font-size: 2.4em;
+    line-height: 1.1em;
+    font-weight: 700;
+    display: inline-block;
+    color: #ecf0f1;
+}
+#actorBio > h3 {
+    margin: 0;
+    padding: 0 40px;
+    font-weight: 600;
+    line-height: 1.3em;
+    font-size: 1.3em;
+    color: #ecf0f1;
+}
+
+#actorsInfo {
+    width: 15%;
+    height: 900px;
+    float: left;
+    color: #ecf0f1;
+}
+
+#actorsInfo > h5 {
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+#gallery {
+    width: 85%;
+    float: left;
+}
+
+#gallery > h3{
+    margin-top: 100px !important; 
+}
+
+#imageGallery {
+    clear: both;
+    width: 100%;
+    margin-left: 70px;
+    margin-right: 70px;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.img-single {
+    width: 180px;
+    height: 270px;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(214, 214, 214, 0.55), 4px 4px 9px 0 rgba(154, 154, 154, 0.83);
+}
+
+.img-single:hover {
+    box-shadow: -3px -3px 6px 0 rgba(113, 113, 113, 0.83), 6px 6px 8px 0 rgba(0, 0, 0, 1);
+}
+
+/* Profile set */
+.relatedContainer {
+    width: 100%;
+    overflow-x: scroll;
+
+}
+
+.relatedSetting {
+    transition: 450ms -webkit-transform;
+    transition: 450ms transform;
+    transition: 450ms transform, 450ms -webkit-transform;
+    font-size: 0;
+    margin-top: 50px;
+    white-space: nowrap;
+}
+
+.relatedPoster {
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    height: 270px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 450ms all;
+    margin-bottom: 30px;
+    -webkit-transform-origin: center left;
+            transform-origin: center left;
+}
+
+.relatedPosterImg {
+    width: 180px;
+    height: 270px;
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
+            object-fit: cover;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(214, 214, 214, 0.55), 4px 4px 9px 0 rgba(154, 154, 154, 0.83);
+}
+
+.relatedSetting:hover {
+    -webkit-transform: translate3d(20px, 0, 0);
+            transform: translate3d(20px, 0, 0);
+}
+
+.relatedSetting:hover .relatedPoster {
+    opacity: 0.3;
+}
+
+.relatedSetting:hover .relatedPoster:hover {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    opacity: 1;
+}
+
+.relatedPoster:hover ~ .relatedPoster {
+    -webkit-transform: translate3d(125px, 0, 0);
+            transform: translate3d(125px, 0, 0);
+}
+
+.relateScene{
+    width: 180px;
+    height: 270px;
+    margin: 30px;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+    position: relative;
+    display: inline-block;
+}
+
+.relateMovie {
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    height: 270px;
+    transition: 450ms all;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(-110px);
+    -moz-transform: translateZ(-110px);
+    transform: translateZ(-110px);
+}
+
+.relateMovie:hover {
+    -webkit-transform: rotateY(-78deg) translateZ(20px);
+    -moz-transform: rotateY(-78deg) translateZ(20px);
+    transform: rotateY(-78deg) translateZ(20px);
+}
+
+.relateMovie .relatedMedia, 
+.relateMovie .relateInfo {
+    position: absolute;
+    width: 180px;
+    height: 270px;
+    background-color: #fff;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+
+.relateMovie .relatedMedia  {
+    -webkit-transform: translateZ(90px);
+    -moz-transform: translateZ(90px);
+    transform: translateZ(90px);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.relateMovie .relateInfo {
+    -webkit-transform: rotateY(90deg) translateZ(110px);
+    -moz-transform: rotateY(90deg) translateZ(110px);
+    transform: rotateY(90deg) translateZ(110px);
+    border: 1px solid #B8B5B5;
+    font-size: 0.75em;
+}
+
+.relateInfo header {
+    color: rgb(19, 15, 15);
+    padding: 7px 10px;
+    font-weight: bold;
+    height: 130px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-shadow: 0px 1px 1px rgba(0,0,0,1);
+}
+
+.relateInfo header .rating {
+    border: 1px solid #FFF;
+    padding: 0px 3px;
+}
+
+.relateInfo .relateOverview {
+    padding: 1.2em 1.4em;
+    margin: 2px 0 0;
+    font-weight: 700;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4em;
+    border-top: 10px solid #555;
+    overflow-y: scroll;
+    height: 135px;
+    white-space: normal;
+}
+
+.relateInfo {
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(214, 214, 214, 0.55), 4px 4px 9px 0 rgba(154, 154, 154, 0.83);
+}
+
+.relateMovie .relatedMedia,
+.relateMovie .relateInfo,
+.relateMovie .relateInfo header {
+    -webkit-transition: box-shadow 450ms;
+    -moz-transition: box-shadow 450ms;
+    transition: box-shadow 450ms;
 }

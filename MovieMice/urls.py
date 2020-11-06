@@ -24,5 +24,6 @@ urlpatterns = [
     path('search_results', views.search, name='search_shows'),
     path('seasons/<show_ID>', views.seasons_list, name='seasons'),
     path('episodes/<season_num>', views.episodes_list, name='episodes'),
-    path('series_details/', views.series_details, name='series_details'),
+    path('episode_details', views.episode_details, name='episode_details'),
+    path('actors/<cast_ID>', views.actor_details, name='actors'),
 ]

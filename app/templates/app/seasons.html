@@ -6,14 +6,20 @@
         <div class="row">
             <div class="col-md-12">
                 {% for poster, title, seasonNum, overview in seasonDetails %}
-                    {% if poster != None %}
-                        <div class="col-sm-3" style="min-width:226px; margin-top: 15px;">
+                    
+                        <div class="col-sm-3" style="min-width:270px; margin-top: 15px;">
                             <div class="card pull-left scene">
                                 <div class="movie">    
                                     <a href="../episodes/{{ seasonNum }}" title="{{ title }}">
-                                        <div class="posterSearch" 
-                                            style="background: url('https://image.tmdb.org/t/p/original{{ poster }}'); background-repeat: no-repeat; background-size: 100% 100%;">
-                                        </div>
+                                        {% if poster != None %}
+                                            <div class="posterSearch" 
+                                                style="background: url('https://image.tmdb.org/t/p/original{{ poster }}'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                            </div>
+                                        {% else %}
+                                            <div class="posterSearch" 
+                                                style="background: url('../../static/app/images/no_image.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
+                                            </div>
+                                        {% endif %}     
                                         <div class="info">
                                             <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdrop }}')">
                                                 {{ title }}
@@ -24,13 +30,9 @@
                                 </div>
                             </div>
                         </div>        
-                    {% endif %}            
+                           
                 {% endfor %}
             </div>
         </div>
     </div>
-
-
-
-
 {% endblock %}

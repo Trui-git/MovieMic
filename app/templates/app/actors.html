@@ -1,0 +1,73 @@
+{% extends "app/index.html" %}
+
+{% block content %}
+    <div id="actorFrame">
+        <div id="actorStats" style="background-image: url('https://image.tmdb.org/t/p/w500/{{ profilePath }}');"></div>
+        <div id="actorBio">
+            <h2>{{ name }}</h2>
+            <h3>Biography</h3>
+            <p class="bio">{{ biography }}</p>
+        </div>
+    </div>
+
+    <div id="actorsInfo">
+        <h3 style="margin-bottom: 20px; font-weight:bold">Personal Info</h3>
+        <h4>Known For: </h4>
+        <h5>{{ department }}</h5>
+        <h4>Gender:</h4>
+        {%  if gender == 1 %}
+            <h5> Female </h5>
+        {% else %}
+            <h5> Male </h5>
+        {% endif %}
+
+        <h4>Popularty: </h4>
+        <h5>{{ popularity }}</h5>
+
+        <h4>Birthday: </h4>
+        {%  if birthday != None %}
+            <h5>{{ birthday }}</h5>
+        {% else %}
+            <h5>Unknown</h5>
+        {% endif %}
+
+        <h4>Place of Birth:</h4>
+        {%  if placeOfBirth != None %}
+            <h5>{{ placeOfBirth }}</h5>
+        {% else %}
+            <h5>Unknown</h5>
+        {% endif %}
+    
+        <h4>Official Site:</h4>
+        {%  if homepage != None %}
+            <h5>{{ homepage }}</h5>
+        {% else %}
+            <h5>Unknown</h5>
+        {% endif %}
+    </div>
+
+    <div id="gallery">    
+        <h3 style="margin: 40px 0 0 85px; font-weight:bold">Profile Set</h3>
+        <div class="relatedContainer">  
+            <div class="relatedSetting">
+                {% for names, voteCounts, voteAverages, firstAirDates, posterPaths, backdropPaths, overviews, popularities, characters, creditIds, episodeCounts in actorDetails %}
+                    {% if posterPaths != None %}
+                    <div class="relateScene">
+                        <div class="relateMovie">
+                            <div class="relatedMedia" >
+                                <img class="relatedPosterImg" src="https://image.tmdb.org/t/p/original{{ posterPaths }}" alt=""  />
+                            </div>
+                            <div class="relateInfo">
+                                <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdropPaths }}')">
+                                </header>
+                                <div class="relateOverview" > <h5>Overview:</h5> {{ overviews }}</div>
+                            </div>  
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
