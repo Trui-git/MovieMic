@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('search_results', views.search, name='search_shows'),
     path('seasons/<show_ID>', views.seasons_list, name='seasons'),
-    path('episodes/<season_num>', views.episodes_list, name='episodes'),
-    path('episode_details', views.episode_details, name='episode_details'),
+    path('<show_ID>/season<season_num>', views.episodes_list, name='episodes'),
+    path('<show_ID>/season<season_num>/episode<episode_num>/episode_details', views.episode_details, name='episode_details'),
     path('actors/<cast_ID>', views.actor_details, name='actors'),
 ]

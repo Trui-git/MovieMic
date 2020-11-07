@@ -79,37 +79,26 @@ def seasons_list(request, show_ID):
         request, 
         'app/seasons.html',
         {
-            'title': 'Seasons',
-            'message': 'Your momma calls my momma a nice name',
+            'showID': show_ID,
             'year': datetime.now().year,
             'seasonDetails': zip(seasonPosters, seasonTitles, seasonNums, seasonOverview, seasonBackDrop),
         }
     )
 
-def episodes_list(request, season_num):
+def episodes_list(request, show_ID, season_num):
     assert isinstance(request, HttpRequest)
 
-    totalSeason = fetch.fetch.get_max_seasons()
-
-
-    """  Get paras from episode.html first """
-    seasonNum = request.POST.get('seasonNum')
-    if seasonNum == None:
-        seasonNum = season_num
-        # prevent user keying season number from url greater than total season
-        if int(season_num) > int(totalSeason):
-           seasonNum = str(totalSeason)
-
-    episode_num = request.POST.get('episodeNum')
-    if episode_num == None:
-        episode_num = " "
-
-    stuff = fetch.fetch.get_episodes(seasonNum)
+    totalSeason = fetch.fetch.get_max_seasons(show_ID)
+    # prevent user keying season number from url greater than total season
+    if int(season_num) > int(totalSeason):
+        season_num = str(totalSeason)
+    
+    stuff = fetch.fetch.get_episodes(show_ID, season_num)
     ep_names = stuff[0]
     ep_IDs = stuff[1]
     ep_posters = stuff[2]
 
-    creatorStuffs, tvShowDetails, tvShowPoster, castDetails, imagesPaths, video = fetch.fetch.get_season_details(seasonNum)
+    creatorStuffs, tvShowDetails, tvShowPoster, castDetails, imagesPaths, video = fetch.fetch.get_season_details(show_ID, season_num)
     creators = creatorStuffs[0]
     creatorPics = creatorStuffs[1]
     episodeRunTime = tvShowDetails[6]
@@ -147,25 +136,18 @@ def episodes_list(request, season_num):
             'tvShowFirstAirDate':tvShowDetails[7],
             'tvShowSeasonEpisodesNum':tvShowDetails[9],
             'tvShowVideo': video,
-            'episode_Num': episode_num,
-            'season_num': seasonNum,
+            'season_num': season_num,
+            'show_ID': show_ID,
             'message': 'Description for the page',
             'year': datetime.now().year,
             'ep_details': zip(ep_names, ep_IDs, ep_posters),
         }
     )
 
-def episode_details(request):
+def episode_details(request, show_ID, season_num, episode_num):
     assert isinstance(request, HttpRequest)
-    season_num = request.POST.get('seasonNum')
-    if season_num == None:
-        season_num = " "
 
-    episode_num = request.POST.get('episodeNum')
-    if episode_num == None:
-        episode_num = " "
-
-    episodeDetails, crewStuffs, guestStuffs = fetch.fetch.get_episode_details(season_num, episode_num)
+    episodeDetails, crewStuffs, guestStuffs = fetch.fetch.get_episode_details(show_ID, season_num, episode_num)
     
     if crewStuffs == []:
         crews = ""

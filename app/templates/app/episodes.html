@@ -81,31 +81,30 @@
             </div>
         </div>
     </div>
-    <form action='../episode_details' method='POST'>
-        {% csrf_token %}
-        <div class="episodeContainer">  
-            <div class="episodeSetting">
-                {% for title,epNum,poster in ep_details %}
-                        <div class="episodePoster">
-                            {% if poster != None %}
-                                <div class="posterMedia" >
-                                    <img class="episodePosterImg" src="https://image.tmdb.org/t/p/original{{ poster }}" alt=""  />
-                                </div>
-                            {% else %} 
-                                <div class="posterMedia" >
-                                    <img class="episodePosterImg" src="../../static/app/images/no_ep_image.jpg" alt=""  />
-                                </div>
-                            {% endif %}
-                            <button id="imageButton" 
-                                type="submit" 
-                                name="episodeNum" 
-                                value={{ epNum }}>
-                            </button>
-                            <h5>Episode {{ epNum }} </h5>
-                            <input type="hidden" id="custId" name="seasonNum" value={{season_num}}> 
-                        </div>
-                {% endfor %}
-            </div>
+
+    <div class="episodeContainer">  
+        <div class="episodeSetting">
+            {% for title,epNum,poster in ep_details %}
+                <a href="../{{show_ID}}/season{{season_num}}/episode{{epNum}}/episode_details" title="{{ title }}">
+                    <div class="episodePoster">
+                        {% if poster != None %}
+                            <div class="posterMedia" >
+                                <img class="episodePosterImg" src="https://image.tmdb.org/t/p/original{{ poster }}" alt=""  />
+                            </div>
+                        {% else %} 
+                            <div class="posterMedia" >
+                                <img class="episodePosterImg" src="../../static/app/images/no_ep_image.jpg" alt=""  />
+                            </div>
+                        {% endif %}
+                        <button id="imageButton" 
+                            type="submit" 
+                            name="episodeNum" 
+                            value={{ epNum }}>
+                        </button>
+                        <h5>Episode {{ epNum }} </h5>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
-    </form> 
+    </div>
 {% endblock %}

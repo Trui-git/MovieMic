@@ -125,11 +125,11 @@ class fetch():
         return images[0]
 
 
-    def get_episodes(season_num):
+    def get_episodes(show_ID, season_num):
         global master_season_num
         master_season_num = season_num
 
-        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + season_num + "?api_key=" + api_key
+        url = "https://api.themoviedb.org/3/tv/" + show_ID + "/season/" + season_num + "?api_key=" + api_key
         response = requests.get(url)
         stuff = []
 
@@ -156,8 +156,8 @@ class fetch():
         
         return stuff
 
-    def get_season_details(season_num):
-        seasonUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "?api_key=" + api_key
+    def get_season_details(show_ID, season_num):
+        seasonUrl = "https://api.themoviedb.org/3/tv/" + show_ID + "?api_key=" + api_key
         response = requests.get(seasonUrl)
         creatorStuff = []
         tvShowDetails = []
@@ -185,7 +185,7 @@ class fetch():
         else:
             creatorStuff = None
 
-        seasonUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "?api_key=" + api_key
+        seasonUrl = "https://api.themoviedb.org/3/tv/" + show_ID + "/season/" + str(season_num) + "?api_key=" + api_key
         response = requests.get(seasonUrl)
         episodes = []
         overview = []
@@ -200,7 +200,7 @@ class fetch():
         tvShowDetails.append(seasonOverview)
         tvShowDetails.append(len(episodes))
 
-        creditsUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "/credits?api_key=" + api_key
+        creditsUrl = "https://api.themoviedb.org/3/tv/" + show_ID + "/season/" + str(season_num) + "/credits?api_key=" + api_key
         response = requests.get(creditsUrl)
         creditDetails = []
         if(response.ok):
@@ -226,7 +226,7 @@ class fetch():
         else:
             creditDetails = None
         
-        imagesUrl = "https://api.themoviedb.org/3/tv/" + masterTvID + "/images?api_key=" + api_key
+        imagesUrl = "https://api.themoviedb.org/3/tv/" + show_ID + "/images?api_key=" + api_key
         response = requests.get(imagesUrl)
         imagesDetails = []
         if(response.ok):
@@ -239,7 +239,7 @@ class fetch():
         else:
             imagesDetails = None
 
-        videoUrl = "https://api.themoviedb.org/3/tv/" + masterTvID  + "/videos?api_key=" + api_key + "&language=en-US"
+        videoUrl = "https://api.themoviedb.org/3/tv/" + show_ID  + "/videos?api_key=" + api_key + "&language=en-US"
         response = requests.get(videoUrl)
         videoKeys = []
         anyKey = 0
@@ -309,8 +309,8 @@ class fetch():
 
         return stuff
 
-    def get_max_seasons():
-        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "?api_key=" + api_key
+    def get_max_seasons(show_ID):
+        url = "https://api.themoviedb.org/3/tv/" + show_ID + "?api_key=" + api_key
         response = requests.get(url)
         stuff = []
 
@@ -322,8 +322,8 @@ class fetch():
 
         return stuff
 
-    def get_episode_details(season_num, episode_num):
-        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + season_num + "/episode/" + episode_num + "?api_key=" + api_key
+    def get_episode_details(show_ID, season_num, episode_num):
+        url = "https://api.themoviedb.org/3/tv/" + show_ID + "/season/" + season_num + "/episode/" + episode_num + "?api_key=" + api_key
         response = requests.get(url)
         crewStuffs = []
         guestStuffs = []
