@@ -44,7 +44,7 @@
             <p>{{ tvShowOverview }}</p>
             <br>
             {% for creators, creatorPics in showCreators %}
-                <p>Creater: {{ creators }}</p>
+                <p>Creator: {{ creators }}</p>
             {% endfor %}
         </div >
 
@@ -101,6 +101,7 @@
                                 name="episodeNum" 
                                 value={{ epNum }}>
                             </button>
+                            <h5>Episode {{ epNum }} </h5>
                             <input type="hidden" id="custId" name="seasonNum" value={{season_num}}> 
                         </div>
                 {% endfor %}

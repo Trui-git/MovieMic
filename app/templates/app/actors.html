@@ -2,7 +2,11 @@
 
 {% block content %}
     <div id="actorFrame">
-        <div id="actorStats" style="background-image: url('https://image.tmdb.org/t/p/w500/{{ profilePath }}');"></div>
+        {% if profilePath != None %}
+            <div id="actorStats" style="background-image: url('https://image.tmdb.org/t/p/w500/{{ profilePath }}');background-size: 100% 100%;"></div>
+        {% else %}
+            <div id="actorStats" style="background-image: url('../../static/app/images/no_image.jpg');background-size: 100% 100%"></div>
+        {% endif %}
         <div id="actorBio">
             <h2>{{ name }}</h2>
             <h3>Biography</h3>
@@ -40,7 +44,14 @@
     
         <h4>Official Site:</h4>
         {%  if homepage != None %}
-            <h5>{{ homepage }}</h5>
+            <h5><a href= "{{ homepage }}" style="color:beige">Link to page</a> </h5>
+        {% else %}
+            <h5>Unknown</h5>
+        {% endif %}
+
+        <h4>IMDB Site:</h4>
+        {%  if imdb_id != None %}
+            <h5><a href="https://www.imdb.com/name/{{ imdb_id }}/" style="color:beige">Link to IMDB</a></h5>
         {% else %}
             <h5>Unknown</h5>
         {% endif %}
@@ -58,8 +69,11 @@
                                 <img class="relatedPosterImg" src="https://image.tmdb.org/t/p/original{{ posterPaths }}" alt=""  />
                             </div>
                             <div class="relateInfo">
-                                <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdropPaths }}')">
-                                </header>
+                                {% if backdropPaths != None %}
+                                    <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdropPaths }}')"></header>
+                                {% else %}
+                                    <header style="background-image: url('../../static/app/images/no_ep_image.jpg')"></header>
+                                {% endif %}
                                 <div class="relateOverview" > <h5>Overview:</h5> {{ overviews }}</div>
                             </div>  
                         </div>

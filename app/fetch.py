@@ -105,6 +105,26 @@ class fetch():
 
         return stuff
 
+    def get_season_backdrop(season_num):
+        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "?api_key=" + api_key
+        response = requests.get(url)
+        images = []
+
+        if(response.ok):
+            jData = json.loads(response.content)
+            data = jData['episodes']
+            
+
+            for idx in range(len(data)):
+                image = data[idx]['still_path']
+                images.append(image)
+
+        else:
+            images = None
+
+        return images[0]
+
+
     def get_episodes(season_num):
         global master_season_num
         master_season_num = season_num

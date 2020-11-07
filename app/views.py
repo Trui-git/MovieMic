@@ -70,6 +70,11 @@ def seasons_list(request, show_ID):
     seasonNums = stuff[2]
     seasonOverview = stuff[3]
 
+    seasonBackDrop = []
+    for num in seasonNums:
+        backdrop = fetch.fetch.get_season_backdrop(num)
+        seasonBackDrop.append(backdrop)
+
     return render(
         request, 
         'app/seasons.html',
@@ -77,7 +82,7 @@ def seasons_list(request, show_ID):
             'title': 'Seasons',
             'message': 'Your momma calls my momma a nice name',
             'year': datetime.now().year,
-            'seasonDetails': zip(seasonPosters, seasonTitles, seasonNums, seasonOverview),
+            'seasonDetails': zip(seasonPosters, seasonTitles, seasonNums, seasonOverview, seasonBackDrop),
         }
     )
 
@@ -201,6 +206,7 @@ def episode_details(request):
             'epVote': episodeDetails[6],
             'epVoteCount':episodeDetails[7],
             'episodeNum':episode_num,
+            'seasonNum':season_num,
         }
     )
 

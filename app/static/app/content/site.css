@@ -96,6 +96,8 @@ footer p {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-radius: 6px;
+    box-shadow: -2px -2px 7px 0 rgba(214, 214, 214, 0.55), 4px 4px 9px 0 rgba(154, 154, 154, 0.83);
 }
 
 .movie .posterSearch  {
@@ -287,17 +289,23 @@ h3 {
     z-index: 5;
 }
 
+.episodePoster > h5 {
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    margin-top: 5px
+}
 /************************************
     CSS section for episodes.html 
  ***********************************/ 
  .episodeDetails {
     float: left;
-    width: 80%;
+    width: calc(100% - 250px);
 }
 
 .episodeContainer {
     float: right;
-    width: 20%;
+    width: 250px;
     max-height: 1350px;
     overflow: auto;
     overflow-x: hidden;
@@ -319,7 +327,7 @@ h3 {
 .episodePoster {
     position: relative;
     width: 144px;
-    height: 81px;
+    height: 100px;
     cursor: pointer;
     transition: 450ms all;
     margin: auto;
@@ -380,6 +388,7 @@ h3 {
     overflow: auto;
     overflow-x: hidden;
     margin-top: 30px;
+    min-width: 250px;
 }
 
 .seasonVideo {
@@ -467,7 +476,7 @@ h3 {
     font-weight: 700;
     color: #666;
     line-height: 1.4em;
-    height: 175px;
+    height: 165px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -515,6 +524,7 @@ CSS setting for Episode_detail.html
 .episodeDetailCrewGuest {
     float: left;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 
@@ -581,7 +591,7 @@ CSS setting for Episode_detail.html
 
 #actorsInfo {
     width: 15%;
-    height: 900px;
+    height: auto;
     float: left;
     color: #ecf0f1;
 }
@@ -623,8 +633,9 @@ CSS setting for Episode_detail.html
 /* Profile set */
 .relatedContainer {
     width: 100%;
-    overflow-x: scroll;
-
+    overflow: auto;
+    overflow-y: hidden;
+    margin-left: 75px;
 }
 
 .relatedSetting {

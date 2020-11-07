@@ -15,9 +15,12 @@
                                             style="background: url('https://image.tmdb.org/t/p/original{{ poster }}');background-size: 100% 100%;"> 
                                         </div>
                                         <div class="info">
-                                            <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdrop }}')">
-                                            </header>
-                                            <div class="overview" >{{ overview }}</div>
+                                            {% if backdrop != None %}
+                                                <header style="background-image: url('https://image.tmdb.org/t/p/original{{ backdrop }}')"> </header>
+                                            {% else %}
+                                                <header style="background-image: url('../../static/app/images/no_ep_image.jpg')"></header>
+                                            {% endif %}                                            
+                                            <div class="overview" ><h5>Overview:</h5>{{ overview }}</div>
                                         </div>                                       
                                     </a>                                    
                                 </div>

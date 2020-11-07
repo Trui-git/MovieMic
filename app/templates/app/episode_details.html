@@ -15,7 +15,7 @@
 
         <div class="episodeDetailInfo">
             <h4>{{ epName }}</h4>
-            <p>Rating: {{ epVote }} &nbsp;&nbsp; Rating Count: {{ epVoteCount }} &nbsp;&nbsp; Episode: {{ episodeNum }}</p>  
+            <p>Rating: {{ epVote }} &nbsp;&nbsp; Rating Count: {{ epVoteCount }} &nbsp;&nbsp; Season: {{ seasonNum }} &nbsp;&nbsp; Episode: {{ episodeNum }}</p>  
             <p>Air Date: {{ epAirDate }}</p>
             <h5>Overview: </h5>
             <p>{{ epOverview }}</p>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12">
                     {% for crews, crewPics, crewIDs, crewDepartments, crewJobs in showCrews %}
-                        <div class="col-sm-3" style="min-width:150px; margin-top: 15px;">
+                        <div class="col-sm-3" style="min-width:150px;">
                             <div class="card pull-left castScene">
                                 <div class="castMovie">
                                     <a href="../actors/{{ crewIDs }}" title="{{ title }}">
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-md-12">
                     {% for guests, guestPics, guestIDs, guestCharacters in showGuests %}
-                        <div class="col-sm-3" style="min-width:150px; margin-top: 15px;">
+                        <div class="col-sm-3" style="min-width:150px;">
                             <div class="card pull-left castScene">
                                 <div class="castMovie">
                                     <a href="../actors/{{ guestIDs }}" title="{{ title }}">
