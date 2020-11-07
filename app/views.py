@@ -79,6 +79,7 @@ def seasons_list(request, show_ID):
         request, 
         'app/seasons.html',
         {
+            'title':'TV Shows',
             'showID': show_ID,
             'year': datetime.now().year,
             'seasonDetails': zip(seasonPosters, seasonTitles, seasonNums, seasonOverview, seasonBackDrop),
@@ -122,6 +123,7 @@ def episodes_list(request, show_ID, season_num):
         request,
         'app/episodes.html',
         {
+            'title':'TV Shows',
             'showCreators': zip(creators, creatorPics),
             'showCasts': zip(casts, castPics, castIDs, castCharacters),
             'extraImages': imagesPaths,
@@ -179,6 +181,7 @@ def episode_details(request, show_ID, season_num, episode_num):
         request,
         'app/episode_details.html',
         {
+            'title':'TV Shows',
             'showCrews': zip(crews, crewPics, crewIDs, crewDepartments, crewJobs),
             'showGuests': zip(guests, guestPics, guestIDs, guestCharacters),
             'epAirDate': episodeDetails[0],
@@ -226,6 +229,7 @@ def actor_details(request, cast_ID):
         request,
         'app/actors.html',
         {
+            'title':'TV Shows',
             "adult": actorBios[0],
             "biography": actorBios[1],
             "birthday": actorBios[2],
