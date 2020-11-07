@@ -31,7 +31,7 @@
                         <div class="col-sm-3" style="min-width:150px;">
                             <div class="card pull-left castScene">
                                 <div class="castMovie">
-                                    <a href="../actors/{{ crewIDs }}" title="{{ title }}">
+                                    <a href="../../../actors/{{ crewIDs }}" title="{{ title }}">
                                         {% if crewPics != None %}
                                             <div class="castPics"                                                 
                                                 style="background: url('https://image.tmdb.org/t/p/original{{ crewPics }}');background-size: 100% 100%;"> 
@@ -67,14 +67,14 @@
                         <div class="col-sm-3" style="min-width:150px;">
                             <div class="card pull-left castScene">
                                 <div class="castMovie">
-                                    <a href="../actors/{{ guestIDs }}" title="{{ title }}">
+                                    <a href="../../../actors/{{ guestIDs }}" title="{{ title }}">
                                         {% if guestPics != None %}
                                             <div class="castPics"                                                 
                                                 style="background: url('https://image.tmdb.org/t/p/original{{ guestPics }}');background-size: 100% 100%;"> 
                                             </div>   
                                         {% else %}
                                             <div class="castPics"       
-                                                style="background: url('../../static/app/images/no_image.jpg');background-size: 100% 100%;">                                                        
+                                                style="background: url('../../../static/app/images/no_image.jpg');background-size: 100% 100%;">                                                        
                                             </div>
                                         {% endif %}     
                                         <div class="castInfo">
