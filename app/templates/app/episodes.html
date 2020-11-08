@@ -46,40 +46,7 @@
             {% for creators, creatorPics in showCreators %}
                 <p>Creator: {{ creators }}</p>
             {% endfor %}
-        </div >
-
-        <h3> Series Cast </h3>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    {% for casts, castPics, castIDs, castCharacters in showCasts %}
-                        <div class="col-sm-3" style="min-width:150px; margin-top: 15px;">
-                            <div class="card pull-left castScene">
-                                <div class="castMovie">
-                                    <a href="../actors/{{ castIDs }}" title="{{ title }}">
-                                        {% if castPics != None %}
-                                            <div class="castPics"                                                 
-                                                style="background: url('https://image.tmdb.org/t/p/original{{ castPics }}');background-size: 100% 100%;"> 
-                                            </div>   
-                                        {% else %}
-                                            <div class="castPics"       
-                                                style="background: url('../../static/app/images/no_image.jpg');background-size: 100% 100%;">                                                        
-                                            </div>
-                                        {% endif %}     
-                                        <div class="castInfo">
-                                            <div class="character" > 
-                                                <h6>Name:</h6> {{ casts }} <br> <br>
-                                                <h6>Character:</h6> {{ castCharacters }}
-                                            </div>
-                                        </div>                                  
-                                    </a>                                    
-                                </div>
-                            </div>
-                        </div>        
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+        </div >      
     </div>
 
     <div class="episodeContainer">  
@@ -105,6 +72,39 @@
                     </div>
                 </a>
             {% endfor %}
+        </div>
+    </div>
+
+    <div class="container-fluid" style="float: left; width: 100%;">
+        <h3> Series Cast </h3>
+        <div class="row">
+            <div class="col-md-12">
+                {% for casts, castPics, castIDs, castCharacters in showCasts %}
+                    <div class="col-sm-3" style="min-width:150px;">
+                        <div class="card pull-left castScene">
+                            <div class="castMovie">
+                                <a href="../actors/{{ castIDs }}" title="{{ title }}">
+                                    {% if castPics != None %}
+                                        <div class="castPics"                                                 
+                                            style="background: url('https://image.tmdb.org/t/p/original{{ castPics }}');background-size: 100% 100%;"> 
+                                        </div>   
+                                    {% else %}
+                                        <div class="castPics"       
+                                            style="background: url('../../static/app/images/no_image.jpg');background-size: 100% 100%;">                                                        
+                                        </div>
+                                    {% endif %}     
+                                    <div class="castInfo">
+                                        <div class="character" > 
+                                            <h6>Name:</h6> {{ casts }} <br> <br>
+                                            <h6>Character:</h6> {{ castCharacters }}
+                                        </div>
+                                    </div>                                  
+                                </a>                                    
+                            </div>
+                        </div>
+                    </div>        
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
