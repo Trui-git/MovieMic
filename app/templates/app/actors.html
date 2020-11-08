@@ -44,14 +44,14 @@
     
         <h4>Official Site:</h4>
         {%  if homepage != None %}
-            <h5><a href= "{{ homepage }}" style="color:beige">Link to page</a> </h5>
+            <h5><a href= "{{ homepage }}" style="color:rgb(27, 226, 226)">Link to page</a> </h5>
         {% else %}
             <h5>Unknown</h5>
         {% endif %}
 
         <h4>IMDB Site:</h4>
         {%  if imdb_id != None %}
-            <h5><a href="https://www.imdb.com/name/{{ imdb_id }}/" style="color:beige">Link to IMDB</a></h5>
+            <h5><a href="https://www.imdb.com/name/{{ imdb_id }}/" style="color:rgb(27, 226, 226)">Link to IMDB</a></h5>
         {% else %}
             <h5>Unknown</h5>
         {% endif %}
@@ -74,7 +74,10 @@
                                 {% else %}
                                     <header style="background-image: url('../../static/app/images/no_ep_image.jpg')"></header>
                                 {% endif %}
-                                <div class="relateOverview" > <h5>Overview:</h5> {{ overviews }}</div>
+                                <div class="relateOverview" > 
+                                    <h5>{{ names }}</h5>
+                                    <h5>Overview:</h5> {{ overviews }}
+                                </div>
                             </div>  
                         </div>
                     </div>
