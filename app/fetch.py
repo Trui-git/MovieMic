@@ -454,11 +454,11 @@ class fetch():
                 voteAverage = data[idx]['vote_average']
                 voteAverages.append(voteAverage)
 
-                firstAirDate = data[idx]['first_air_date']
-                if firstAirDate == '':
-                    firstAirDates.append("0000-00-00")
-                else:
+                if 'first_air_date' in data[idx]:
+                    firstAirDate = data[idx]['first_air_date']
                     firstAirDates.append(firstAirDate)
+                else:
+                     firstAirDates.append("0000-00-00")
 
                 posterPath = data[idx]['poster_path']
                 posterPaths.append(posterPath)
