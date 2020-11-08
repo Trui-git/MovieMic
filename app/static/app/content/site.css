@@ -544,6 +544,7 @@ CSS setting for Episode_detail.html
 #actorFrame {
     margin-top: 20px;
     width: 100%;
+    min-width: 600px;
     height: 450px;
     border-radius: 6px;
     box-shadow: -2px -2px 7px 0 rgba(99, 99, 99, 0.55), 4px 4px 9px 0 rgba(0, 0, 0, 0.83);
