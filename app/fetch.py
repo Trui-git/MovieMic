@@ -105,8 +105,8 @@ class fetch():
 
         return stuff
 
-    def get_season_backdrop(season_num):
-        url = "https://api.themoviedb.org/3/tv/" + masterTvID + "/season/" + str(season_num) + "?api_key=" + api_key
+    def get_season_backdrop(show_ID, season_num):
+        url = "https://api.themoviedb.org/3/tv/" + show_ID + "/season/" + str(season_num) + "?api_key=" + api_key
         response = requests.get(url)
         images = []
 
@@ -122,7 +122,10 @@ class fetch():
         else:
             images = None
 
-        return images[0]
+        if len(images) > 0:
+            return images[0]
+        else:
+            return None
 
 
     def get_episodes(show_ID, season_num):
@@ -452,7 +455,10 @@ class fetch():
                 voteAverages.append(voteAverage)
 
                 firstAirDate = data[idx]['first_air_date']
-                firstAirDates.append(firstAirDate)
+                if firstAirDate == '':
+                    firstAirDates.append("0000-00-00")
+                else:
+                    firstAirDates.append(firstAirDate)
 
                 posterPath = data[idx]['poster_path']
                 posterPaths.append(posterPath)

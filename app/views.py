@@ -72,7 +72,7 @@ def seasons_list(request, show_ID):
 
     seasonBackDrop = []
     for num in seasonNums:
-        backdrop = fetch.fetch.get_season_backdrop(num)
+        backdrop = fetch.fetch.get_season_backdrop(show_ID, num)
         seasonBackDrop.append(backdrop)
 
     return render(
