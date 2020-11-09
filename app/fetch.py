@@ -344,7 +344,6 @@ class fetch():
             crewNames = []
             crewPosters = []
             crewIDs = []
-            crewCharacters = []
             crewDepartments = []
             crewJobs = []
             crewDetails =jData['crew']
@@ -359,6 +358,32 @@ class fetch():
                 crewDepartments.append(crewDepartment)
                 crewJob = crewDetails[idx]['job']                
                 crewJobs.append(crewJob)
+
+            
+            #find the duplicte in crewPosters
+            dupltcate = {}
+            for (ind,elem) in enumerate(crewNames):
+                if elem in dupltcate:
+                    dupltcate[elem].append(ind)
+                else:
+                    dupltcate.update({elem:[ind]})
+
+            #remove the duplicated item in all info array
+            for key,value in dupltcate.items():
+                if len(value) > 1:
+                    for i in range(1, len(value)): 
+                        crewNames[value[i]] = "None"
+                        crewPosters[value[i]] = "None"
+                        crewIDs[value[i]] = "None"
+                        crewDepartments[value[i]] = "None"
+                        crewJobs[value[i]] = "None"
+            
+            crewNames[:] = [item for item in crewNames if item != 'None']
+            crewPosters[:] = [item for item in crewPosters if item != 'None']
+            crewIDs[:] = [item for item in crewIDs if item != 'None']
+            crewDepartments[:] = [item for item in crewDepartments if item != 'None']
+            crewJobs[:] = [item for item in crewJobs if item != 'None']
+            
 
             crewStuffs.append(crewNames)
             crewStuffs.append(crewPosters)
@@ -480,6 +505,42 @@ class fetch():
 
                 episodeCount = data[idx]['episode_count']
                 episodeCounts.append(episodeCount)
+
+            #find the duplicte in posterPath
+            dupltcate = {}
+            for (ind,elem) in enumerate(posterPaths):
+                if elem in dupltcate:
+                    dupltcate[elem].append(ind)
+                else:
+                    dupltcate.update({elem:[ind]})
+
+            #remove the duplicated item in all info array
+            for key,value in dupltcate.items():
+                if len(value) > 1:
+                    for i in range(1, len(value)): 
+                        names[value[i]] = "None"
+                        voteCounts[value[i]] = "None"
+                        voteAverages[value[i]] = "None"
+                        firstAirDates[value[i]] = "None"
+                        posterPaths[value[i]] = "None"
+                        backdropPaths[value[i]] = "None"
+                        overviews[value[i]] = "None"
+                        popularities[value[i]] = "None"
+                        characters[value[i]] = "None"
+                        creditIds[value[i]] = "None"
+                        episodeCounts[value[i]] = "None"
+
+            names[:] = [item for item in names if item != 'None']
+            voteCounts[:] = [item for item in voteCounts if item != 'None']
+            voteAverages[:] = [item for item in voteAverages if item != 'None']
+            firstAirDates[:] = [item for item in firstAirDates if item != 'None']
+            posterPaths[:] = [item for item in posterPaths if item != 'None']
+            backdropPaths[:] = [item for item in backdropPaths if item != 'None']
+            overviews[:] = [item for item in overviews if item != 'None']
+            popularities[:] = [item for item in popularities if item != 'None']
+            characters[:] = [item for item in characters if item != 'None']
+            creditIds[:] = [item for item in creditIds if item != 'None']
+            episodeCounts[:] = [item for item in episodeCounts if item != 'None']   
 
             stuff.append(names)
             stuff.append(voteCounts)
